@@ -1,5 +1,7 @@
 # !C:\Users\enjoy\AppData\Local\Programs\Python\Python38\python.exe
 # -*- coding: utf-8 -*-
+import sys
+
 import PySimpleGUI as sg
 
 from PyQt5.QtGui import QIcon
@@ -10,7 +12,7 @@ import function as func
 
 def main():
     app = QApplication(sys.argv)
-    app.setWindowIcon(QIcon(resource_path('bar.ico')))
+    app.setWindowIcon(QIcon(func.resourcePath("resources/favicon.ico")))
 
     func.makeResouceFiles()
 
@@ -21,6 +23,8 @@ def main():
     ]
 
     window = sg.Window(Var.TITLE, layout)
+    
+    sys.exit(app.exec())
 
     while True:
         event, values = window.read()
@@ -29,7 +33,7 @@ def main():
 
     window.close()
 
-    sys.exit(app.exec())
+    
 
 if __name__ == '__main__':
     main()
