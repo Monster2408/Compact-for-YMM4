@@ -131,3 +131,6 @@ dmypy.json
 # windowsのショートカットとexe
 *.lnk
 git-bash.exe*
+
+# debug dir
+test/
