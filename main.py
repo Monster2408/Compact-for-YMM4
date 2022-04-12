@@ -4,17 +4,18 @@ import sys
 
 import PySimpleGUI as sg
 
-from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QApplication, QWidget
-
 import Var
 import function as func
 
 def main():
-    app = QApplication(sys.argv)
-    app.setWindowIcon(QIcon(func.resourcePath("resources/favicon.ico")))
-
     func.makeResouceFiles()
+    
+    # This bit gets the taskbar icon working properly in Windows
+    if sys.platform.startswith('win'):
+        import ctypes
+        # Make sure Pyinstaller icons are still grouped
+        if sys.argv[0].endswith('.exe') == False:
+            ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(u'CompanyName.ProductName.SubProduct.VersionInformation') # Arbitrary string
 
     layout = [
         [sg.Text('プロジェクトファイル', size=(20, 1))],
@@ -22,9 +23,7 @@ def main():
         [sg.FileBrowse('選択', key='project-file', file_types=(("プロジェクトファイル", ".ymmp"),))]
     ]
 
-    window = sg.Window(Var.TITLE, layout)
-    
-    sys.exit(app.exec())
+    window = sg.Window(Var.TITLE, layout, icon=icon, resizable=False, finalize=True)
 
     while True:
         event, values = window.read()
@@ -33,9 +32,8 @@ def main():
 
     window.close()
 
-    
-
 if __name__ == '__main__':
+    icon = Var.BASE64_ICON
     main()
 
 
