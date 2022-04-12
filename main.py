@@ -18,12 +18,12 @@ def main():
             ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(u'CompanyName.ProductName.SubProduct.VersionInformation') # Arbitrary string
 
     layout = [
-        [sg.Text('プロジェクトファイル', size=(20, 1))],
+        [sg.Text('プロジェクトファイル')],
         [sg.Input(key='project-file')],
         [sg.FileBrowse('選択', key='project-file', file_types=(("プロジェクトファイル", ".ymmp"),))]
     ]
 
-    window = sg.Window(Var.TITLE, layout, icon=icon, resizable=False, finalize=True)
+    window = sg.Window(Var.TITLE, layout, icon=icon, resizable=True, finalize=True)
 
     while True:
         event, values = window.read()
