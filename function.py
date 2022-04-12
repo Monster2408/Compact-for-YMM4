@@ -4,6 +4,7 @@ import os
 import sys
 
 import shutil
+import PySimpleGUI as sg
 
 def makeResouceFiles():
     """リソースフォルダを作成"""
@@ -25,3 +26,13 @@ def resourcePath(filename):
     if hasattr(sys, "_MEIPASS"):
         return os.path.join(sys._MEIPASS, filename)
     return os.path.join(filename)
+
+def checkYmmp(path):
+    if len(path) == 0:
+        sg.popup('ファイルを選択してください', path)
+        return False
+    elif os.path.exists(path) != True:
+        sg.popup('ファイルが間違えています', path)
+        return False
+    else:
+        return True
